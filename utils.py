@@ -56,12 +56,12 @@ def metro_chain(x_t, y_t, alpha, beta, n, max_numb_states=None, energy_stop=None
 
         # decide if new state is accepted
         new_energy = compute_energy(new_w, x_t, y_t, m)
-        a = np.exp(- beta * (new_energy - current_energy))
 
-        if a >= 1:
+        if new_energy < current_energy:
             current_w = new_w
             energy.append(new_energy)
         else:
+            a = np.exp(- beta * (new_energy - current_energy))
             r = np.random.random_sample()
             if r < a:
                 current_w = new_w
