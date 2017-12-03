@@ -97,3 +97,27 @@ def run_model(alpha, beta, n, x_t, y_t, max_numb_states=100, num_repetitions=10,
             print('Number of states in the chain :{}'.format(len(tmp)))
     energy = get_mean_energy(energies, num_repetitions=num_repetitions)
     return energy
+
+
+def overlap(w, w_t, n):
+    return np.vdot(w, w_t)/n
+
+
+def simulated_annealing(x_t, y_t, alpha, initial_beta, beta_pace, beta_increase, n, max_numb_states=100,
+                        num_repetitions=10, verbose=False):
+    energies = []
+    overlaps = []
+    beta = initial_beta
+
+    for i in range(num_repetitions):
+        if i % beta_pace == 0:
+            beta += beta_increase
+
+        w, e = metro_chain(alpha=alpha, beta=beta, x_t=x_t, y_t=y_t, n=n, max_numb_states=max_numb_states,
+                           verbose=verbose)
+        energies.append(e)
+        overlaps.append(overlap(w, w_t, n))
+
+    energy = get_mean_energy(energies, num_repetitions=num_repetitions)
+    mean_overlap = get_mean_energy(overlaps, num_repetitions=num_repetitions)
+    return energy, mean_overlap
