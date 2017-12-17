@@ -3,11 +3,15 @@ import pickle
 import matplotlib.pyplot as plt
 
 def q2():
+    """
+    Answer to questions 2 and 3 (values of the energy and the overlap for different values of alpha)
+    :return:
+    """
     with open("q2.pickle", 'rb') as f:
         energies = pickle.load(f)
     with open("q3.pickle", 'rb') as f:
         overlaps = pickle.load(f)
-    betas = [0.05]
+    betas = [0.05, 0.5, 1, 5]
     alphas = list(range(1,5))
 
     for beta in betas:
@@ -43,33 +47,21 @@ def ener_over_alphas():
 
     plt.show(block=False)
 
-def ener_beta_increase():
-    """
-    Evolution of the normalized energy in function of beta_pace for fixed alpha=1, fixed beta_initial=0.05
-    """
-    with open("SA_energies0.05.pickle",'rb') as f:
-        energies = pickle.load(f)
-
-    beta_pace = sorted(list(energies.keys()))
-    e = [energies[b] for b in beta_pace]
-    plt.plot(beta_pace, e, color="blue")
-    plt.xlabel("beta_increase")
-    plt.ylabel("normalized energy")
-
-    plt.show(block=False)
-
 def cross_val_curve():
-    with open("SA_energies.pickle",'rb') as f:
+    """
+    Energy as a function of beta_increase, for different values of beta_initial.
+    """
+    with open("SA_energies_crossval.pickle",'rb') as f:
         energies = pickle.load(f)
 
-    initial_betas = [0.01, 0.05, 0.1]
-    beta_increases = [1.2, 3, 5, 10, 15, 25, 50]
+    initial_betas = [0.01, 0.05]
+    beta_increases = [1.1, 1.2, 1.4, 1.8, 2.5, 5]
     for beta in initial_betas:
         e = [energies[(beta,b)] for b in beta_increases]
         plt.plot(beta_increases, e, label="initial_beta="+str(beta))
 
     plt.xlabel("beta_increases")
     plt.ylabel("normalized energy")
-    plt.ylim(0,1.2)
+    plt.ylim(0.4,1)
     plt.legend(loc='upper right')
     plt.show(block=False)

@@ -16,7 +16,7 @@ def try_random(x_t, y_t, w_t, n, max_numb_states):
     argmin = [1]*n
     for i in range(max_numb_states):
         w = [rand_unit() for _ in range(n)]
-        tmp = compute_energy([0]*n, x_t, y_t, n)
+        tmp = compute_energy(w, x_t, y_t, n)
         if tmp < e:
             e = tmp
             argmin = w

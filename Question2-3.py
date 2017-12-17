@@ -1,3 +1,8 @@
+"""
+This script computes the value of the normalized energy and final overlap for the MCMC method, for several
+values of alpha and beta. Modify the lists betas and alphas to choose values.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
@@ -18,11 +23,11 @@ max_numb_states = 10000
 energies = {}
 overlaps = {}
 
-def normalized_energy_overlap(x_t, y_t, alpha, beta, n, max_numb_states, num_repetitions=10):
+def normalized_energy_overlap(x_t, y_t, alpha, beta, n, max_numb_states, num_repetitions=5):
     e = 0
     o = 0
     for i in range(num_repetitions):
-        w, _ = metro_chain(x_t=x_t, y_t=y_t, alpha=alpha, beta=beta, n=n, max_numb_states=max_numb_states)
+        w, _ = metro_chain(x_t=x_t, y_t=y_t, alpha=alpha, beta=beta, n=n, max_numb_states=max_numb_state)
         e += compute_energy(w, x_t, y_t, alpha*n)/(alpha*n)
         o += np.vdot(w, w_t)/n
     return e/num_repetitions, o/num_repetitions
