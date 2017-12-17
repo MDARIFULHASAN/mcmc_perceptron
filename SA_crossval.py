@@ -6,10 +6,10 @@ import pickle
 plt.switch_backend('agg')
 
 N = 1000
-initial_betas = [0.05]
+initial_betas = [0.01, 0.05, 0.1]
 alpha_max = 5
 beta_pace = 100
-beta_increases = [5, 10, 15, 25, 50]
+beta_increases = [1.2, 3, 5, 10, 15, 25, 50]
 alpha = 1
 max_numb_states = 10000
 

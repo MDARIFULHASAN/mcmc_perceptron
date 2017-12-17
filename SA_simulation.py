@@ -11,7 +11,7 @@ alpha_max = 5
 beta_pace = 100
 beta_increase = 10
 alphas = [1, 2, 3, 4, 5]
-max_numb_states = 10000
+max_numb_states = 20000
 
 print("Generating variables")
 w_t, x_t, y_t = teachers_variables(n=N, alpha_max=alpha_max)
