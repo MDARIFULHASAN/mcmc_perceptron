@@ -23,14 +23,16 @@ max_numb_states = 10000
 energies = {}
 overlaps = {}
 
+
 def normalized_energy_overlap(x_t, y_t, alpha, beta, n, max_numb_states, num_repetitions=5):
     e = 0
     o = 0
     for i in range(num_repetitions):
-        w, _ = metro_chain(x_t=x_t, y_t=y_t, alpha=alpha, beta=beta, n=n, max_numb_states=max_numb_state)
+        w, _ = metro_chain(x_t=x_t, y_t=y_t, alpha=alpha, beta=beta, n=n, max_numb_states=max_numb_states)
         e += compute_energy(w, x_t, y_t, alpha*n)/(alpha*n)
         o += np.vdot(w, w_t)/n
     return e/num_repetitions, o/num_repetitions
+
 
 for beta in betas:
     for alpha in alphas:
@@ -39,8 +41,8 @@ for beta in betas:
         energies[(alpha,beta)] = e
         overlaps[(alpha,beta)] = o
 
-with open('q2.pickle', 'wb') as f:
+with open('pickles/q2.pickle', 'wb') as f:
     pickle.dump(energies, f)
 
-with open('q3.pickle', 'wb') as f:
+with open('pickles/q3.pickle', 'wb') as f:
     pickle.dump(overlaps, f)

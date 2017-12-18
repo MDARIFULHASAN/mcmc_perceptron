@@ -127,7 +127,8 @@ def run_model(alpha, beta, n, x_t, y_t, max_numb_states=100, num_repetitions=10,
 def overlap(w, w_t, n):
     return np.vdot(w, w_t)/n
 
-def SA_chain(alpha, initial_beta, beta_pace, beta_increase, x_t, y_t, n, max_numb_states, verbose=False):
+
+def SA_chain(alpha, initial_beta, beta_pace, beta_increase, x_t, y_t, n, max_numb_states):
     """
     Do an iteration of simulated annealing
     :param alpha: the alpha value
@@ -138,7 +139,6 @@ def SA_chain(alpha, initial_beta, beta_pace, beta_increase, x_t, y_t, n, max_num
     :param y_t: corresponding y values (list)
     :param n: number of coordinates
     :param max_numb_states: the maximal number of iterations
-    :param verbose:
     :return: the final w obtained, and the energy time series (as a list)
     """
     m = int(alpha * n)
@@ -185,20 +185,18 @@ def SA_chain(alpha, initial_beta, beta_pace, beta_increase, x_t, y_t, n, max_num
     return current_w, energy
 
 
-
 def run_SA(x_t, y_t, w_t, alpha, initial_beta, beta_pace, beta_increase, n, max_numb_states=100,
-           num_repetitions=10, verbose=False):
+           num_repetitions=10):
     """
     Repeat num_repetitions experiments of simulated annealing
     :return: a list representing the mean time series of the energy, and the mean final overlap
     """
     energies = []
     overlaps = []
-    beta = initial_beta
-    m = int(alpha*n)
 
     for i in range(num_repetitions):
-        w, e = SA_chain(alpha=alpha, initial_beta=initial_beta, beta_pace=beta_pace, beta_increase=beta_increase, x_t=x_t, y_t=y_t, n=n, max_numb_states=max_numb_states, verbose=verbose)
+        w, e = SA_chain(alpha=alpha, initial_beta=initial_beta, beta_pace=beta_pace, beta_increase=beta_increase,
+                        x_t=x_t, y_t=y_t, n=n, max_numb_states=max_numb_states)
         energies.append(e)
         overlaps.append(overlap(w, w_t, n))
 
