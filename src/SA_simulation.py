@@ -27,15 +27,15 @@ overlaps = {}
 
 for alpha in alphas:
     print("Trying alpha= ", alpha)
-    e,o = run_SA(x_t, y_t, w_t, alpha, initial_beta, beta_pace, beta_increase, N,
-                 max_numb_states=max_numb_states, num_repetitions=10, verbose=True)
+    e, o = run_SA(x_t, y_t, w_t, alpha, initial_beta, beta_pace, beta_increase, N,
+                  max_numb_states=max_numb_states, num_repetitions=10, verbose=True)
     energies[alpha] = e[-1]/int(alpha*N)
     overlaps[alpha] = o
     plt.plot(np.arange(max_numb_states+1), e)
     plt.savefig("SA_alpha"+str(alpha)+".png")
     plt.clf()
 
-with open("SA_energies.pickle", 'wb') as f:
+with open("pickles/SA_energies.pickle", 'wb') as f:
     pickle.dump(energies, f)
-with open("SA_overlaps.pickle", 'wb')  as f:
+with open("pickles/SA_overlaps.pickle", 'wb') as f:
     pickle.dump(overlaps, f) 
