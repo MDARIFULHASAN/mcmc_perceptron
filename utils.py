@@ -1,4 +1,16 @@
 import numpy as np
+import scipy.io
+
+def read_matlab(filename):
+    var = scipy.io.loadmat(filename)
+    y = var['y']
+    X = var['X']
+    M = int(var['M'])
+    N = int(var['N'])
+    M_test = int(var['M_test'])
+    X_test = var['X_test']
+    return y,X,M,N,M_test,X_test
+
 
 
 def rand_unit():
