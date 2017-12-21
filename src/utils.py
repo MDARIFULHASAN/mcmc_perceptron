@@ -4,6 +4,7 @@ import scipy.io
 def read_matlab(filename):
     var = scipy.io.loadmat(filename)
     y = var['y']
+    y = y.reshape(y.size)
     X = var['X']
     M = int(var['M'])
     N = int(var['N'])
