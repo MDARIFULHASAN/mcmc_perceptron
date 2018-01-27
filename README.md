@@ -1,11 +1,14 @@
-# Markov Chains course project
+# Markov Chain Monte Carlo classification
 
-Group: "Les Défenestrés"
+Authors:
    * Adrian Valente
    * Armand Boschin
    * Quentin Rebjock
 
 This project is about the use of MCMC and simulated annealing for the Ising perceptron.
+Find details about the subject of the study [here](https://github.com/armand33/markov_project/blob/master/doc/subject.pdf).
+
+The report including performance and interpretation can be found [here](https://github.com/armand33/markov_project/blob/master/report.pdf).
 
 ## Details of the folders:
  * **doc** : documentation about the project
